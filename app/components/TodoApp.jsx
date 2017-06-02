@@ -1,6 +1,7 @@
 var React = require('react');
 
 var TodoList = require('TodoList');
+var AddTodo = require('AddTodo');
 
 var TodoApp = React.createClass ({
   getInitialState : function() {
@@ -25,11 +26,15 @@ var TodoApp = React.createClass ({
       ]
     }
   },
+  handleAddTodo :function (text) { // we are passing this function into the prop we created inside AddTodo
+    alert('new todo:' + text)
+  },
   render: function () {
     var {todos} = this.state; // todos is the initial state i declared and it is renderd thorugh the state
     return (
       <div>
         <TodoList todos={todos}/>
+        <AddTodo onAddTodo={this.handleAddTodo}/>
       </div>
     )
   }
