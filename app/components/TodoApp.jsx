@@ -12,20 +12,24 @@ var TodoApp = React.createClass ({
       searchText: '', // initial state for search text is an empty string so it will find everything
       todos: [
         {
-          id: uuid(),
-          text: 'walk the dog'
+          id: uuid(), // a unique id created by node package called uuid
+          text: 'walk the dog',
+          completed: false
         },
         {
           id: uuid(),
-          text: 'take the trash'
+          text: 'take the trash',
+          completed: false
         },
         {
           id: uuid(),
-          text: 'Drink some tea'
+          text: 'Drink some tea',
+          completed: true
         },
         {
           id: uuid(),
-          text: 'Eat shawarma!'
+          text: 'Eat shawarma!',
+          completed: true
         }
       ]
     }
@@ -33,13 +37,24 @@ var TodoApp = React.createClass ({
   handleAddTodo :function (text) { // we are passing this function into the prop we created inside AddTodo
     this.setState({
       todos: [
-        ...this.state.todos,
+        ...this.state.todos, //spread operator takes the old arrey and adds it to the new one
         {
           id: uuid(),
-          text: text
+          text: text,
+          completed: false
         }
       ]
     })
+  },
+  handleToggle: function (id){
+    var updatedTodos = this.state.todos.map(function (todo) {
+      if(todo.id === id) {
+        todo.completed = !todo.completed
+      }
+      return todo;
+    })
+
+    this.setState({todos: updatedTodos});
   },
   handleSearch: function (showCompleted, searchText) {
     this.setState({
@@ -53,7 +68,7 @@ var TodoApp = React.createClass ({
     return (
       <div>
         <TodoSearch onSearch={this.handleSearch}/>
-        <TodoList todos={todos}/>
+        <TodoList todos={todos} onToggle={this.handleToggle}/>
         <AddTodo onAddTodo={this.handleAddTodo}/>
       </div>
     )
