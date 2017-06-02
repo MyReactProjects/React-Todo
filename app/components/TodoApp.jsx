@@ -1,4 +1,5 @@
 var React = require('react');
+var uuid = require('node-uuid')
 
 var TodoList = require('TodoList');
 var AddTodo = require('AddTodo');
@@ -11,26 +12,34 @@ var TodoApp = React.createClass ({
       searchText: '', // initial state for search text is an empty string so it will find everything
       todos: [
         {
-          id: 1,
+          id: uuid(),
           text: 'walk the dog'
         },
         {
-          id: 2,
+          id: uuid(),
           text: 'take the trash'
         },
         {
-          id: 3,
+          id: uuid(),
           text: 'Drink some tea'
         },
         {
-          id: 4,
+          id: uuid(),
           text: 'Eat shawarma!'
         }
       ]
     }
   },
   handleAddTodo :function (text) { // we are passing this function into the prop we created inside AddTodo
-    alert('new todo:' + text)
+    this.setState({
+      todos: [
+        ...this.state.todos,
+        {
+          id: uuid(),
+          text: text
+        }
+      ]
+    })
   },
   handleSearch: function (showCompleted, searchText) {
     this.setState({
