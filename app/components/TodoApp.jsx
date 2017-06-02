@@ -20,11 +20,11 @@ var TodoApp = React.createClass ({
         },
         {
           id: 3,
-          text: 'smoke'
+          text: 'Drink some tea'
         },
         {
           id: 4,
-          text: 'lick my balls'
+          text: 'Eat shawarma!'
         }
       ]
     }
