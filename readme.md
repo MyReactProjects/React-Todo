@@ -1,4 +1,4 @@
-#React Todo App
+# React Todo App
 
 This is a simple todo web app built with React that lets the user add todo items, cross them off and view completed and uncompleted todos, using local storage to save the items
 
