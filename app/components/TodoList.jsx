@@ -1,4 +1,5 @@
 var React = require('react');
+var FlipMove = require('react-flip-move');
 
 var Todo = require('Todo');
 var TodoList = React.createClass ({
@@ -22,7 +23,9 @@ var TodoList = React.createClass ({
 
     return (
       <div>
-        {renderTodos()}
+        <FlipMove>
+          {renderTodos()}
+        </FlipMove>
       </div>
 
     )
