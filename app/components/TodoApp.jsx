@@ -1,6 +1,8 @@
 var React = require('react');
 var uuid = require('node-uuid')
 
+var TodoAPI = require('TodoAPI');
+
 var TodoList = require('TodoList');
 var AddTodo = require('AddTodo');
 var TodoSearch = require('TodoSearch');
@@ -10,29 +12,11 @@ var TodoApp = React.createClass ({
     return {
       showCompleted: false, //setting the initial state for show completed- always false
       searchText: '', // initial state for search text is an empty string so it will find everything
-      todos: [
-        {
-          id: uuid(), // a unique id created by node package called uuid
-          text: 'walk the dog',
-          completed: false
-        },
-        {
-          id: uuid(),
-          text: 'take the trash',
-          completed: false
-        },
-        {
-          id: uuid(),
-          text: 'Drink some tea',
-          completed: true
-        },
-        {
-          id: uuid(),
-          text: 'Eat shawarma!',
-          completed: true
-        }
-      ]
-    }
+      todos: TodoAPI.getTodos() // fetching the todos from the local storage
+  };
+},
+  componentDidUpdate : function () {
+    TodoAPI.setTodos(this.state.todos) // adding todos to local storage using the api
   },
   handleAddTodo :function (text) { // we are passing this function into the prop we created inside AddTodo
     this.setState({
