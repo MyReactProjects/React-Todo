@@ -56,7 +56,7 @@ describe('TodoApp', () => {
       todoApp.handleToggle(11)// changed the completed state on the todoData
     expect(todoApp.state.todos[0].completed).toBe(false); //now its spose to be true
     //pay close attention to the syntax
-    expect(todoApp.state.todos[0].completedAt).toBe(undefined)
+    expect(todoApp.state.todos[0].completedAt).toBe(undefined) // can also use .toNotExist()
 
   });
 }); //END MAIN DESCRIBE
