@@ -1,5 +1,6 @@
 var React = require('react');
-var uuid = require('node-uuid')
+var uuid = require('node-uuid');
+var moment = require('moment');
 
 var TodoAPI = require('TodoAPI');
 
@@ -25,7 +26,9 @@ var TodoApp = React.createClass ({
         {
           id: uuid(),
           text: text,
-          completed: false
+          completed: false,
+          createdAt: moment().unix(), // this uses moment js to set a unix timestamp on each todo
+          completedAt: undefined //set to initial state of undefined because it is not created with this - a todo is not created completed
         }
       ]
     })
@@ -34,7 +37,8 @@ var TodoApp = React.createClass ({
     var updatedTodos = this.state.todos.map(function (todo) {
       if(todo.id === id) {
         todo.completed = !todo.completed
-      }
+        todo.completedAt = todo.completed ? moment().unix() : undefined; // this sets a new timestamp when the todo is completed
+      } // using a turenry operator
       return todo;
     })
 
